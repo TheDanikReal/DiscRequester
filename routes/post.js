@@ -11,5 +11,6 @@ $request[$getQuery[link];{
     method: 'POST',
     data: '$getquery[data]'
 }]
+$onlyif[$getquery[link]
     `
 }
