@@ -11,6 +11,7 @@ $request[$getQuery[link];{
     method: 'POST',
     data: '$getquery[data]'
 }]
-$onlyif[$getquery[link]
+$onlyif[$stringStartsWith[$getquery[link];https://google.com;otherwhitelistedurl]==false;{
+
     `
 }
