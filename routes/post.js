@@ -3,15 +3,13 @@ module.exports = {
     code: `
     $send[200;json;$getdata[$default]
 ]
-$if[$getdata[$default]==undefined;400;{
-"error": "true"
-"info": "$getdata[$default]"
-}]
 $request[$getQuery[link];{
     method: 'POST',
     data: '$getquery[data]'
 }]
-$onlyif[$stringStartsWith[$getquery[link];https://google.com;otherwhitelistedurl]==false;{
-
+$onlyif[$stringStartsWith[$getquery[link];https://google.com;otherwhitelistedurl]==false;400;{
+   error: "api is not whitelisted (rake wants that)"
+}
+   
     `
 }
