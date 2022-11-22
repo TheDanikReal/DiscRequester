@@ -26,6 +26,24 @@ api.interpreter.addFunction({
   }
 })
 
+api.interpreter.addFunction({
+    data: new FunctionBuilder()
+    .setName('stringStartsWith')
+    .setValue('description', 'Check if a string starts with text.')
+    .setValue('use', '$stringStartsWith[string;check]')
+    .setValue('returns', 'Boolean'),
+    code: async d => {
+      let r = d.unpack(d);
+      if (!r.inside) return Utils.Warn('Invalid inside provided in:', d.func);
+      let [string, check] = r.splits;
+      if (!string) return Utils.Warn('String is required in:', d.func);
+      if (!check) return Utils.Warn('Check is required in:', d.func);
+        return {
+            code: d.code.resolve(`${d.func}[${r.inside}]`, string.startsWith(check.unescape()))
+        };
+    }
+})
+
 api.routes.load('./routes').then(() => {
     console.log('Source loaded.')
     api.connect()
