@@ -7,7 +7,7 @@ $request[$getQuery[link];{
     method: 'POST',
     data: '$getquery[data]'
 }]
-$onlyif[$stringStartsWith[$getquery[link];https://google.com;otherwhitelistedurl]==false;400;{
+$if[$stringStartsWith[$getquery[link];https://google.com;otherwhitelistedurl]==false;400;{
    error: "api is not whitelisted (rake wants that)"
 }
    
